@@ -4,7 +4,7 @@ import { IEvent } from "./event.interface";
 import { categorizeEvent } from "./event.utils";
 import { Event } from "./event.module";
 
-export const createEvent = async (
+export const createEventIntoDb = async (
   payload: Partial<IEvent>
 ): Promise<IEvent> => {
   const combinedText = `${payload.title ?? ""} ${payload.notes ?? ""}`;
@@ -18,11 +18,11 @@ export const createEvent = async (
   return newEvent;
 };
 
-export const getAllEvents = async (): Promise<IEvent[]> => {
+export const getAllEventsIntoDb = async (): Promise<IEvent[]> => {
   return await Event.find().sort({ date: 1, time: 1 });
 };
 
-export const archiveEvent = async (id: string): Promise<IEvent> => {
+export const archiveEventIntoDb = async (id: string): Promise<IEvent> => {
   const event = await Event.findById(id);
   if (!event) {
     throw new AppError(httpStatus.NOT_FOUND, "Event not found");
@@ -34,9 +34,16 @@ export const archiveEvent = async (id: string): Promise<IEvent> => {
   return event;
 };
 
-export const deleteEvent = async (id: string): Promise<void> => {
+export const deleteEventIntoDb = async (id: string): Promise<void> => {
   const result = await Event.findByIdAndDelete(id);
   if (!result) {
     throw new AppError(httpStatus.NOT_FOUND, "Event not found");
   }
+};
+
+export const EventServices = {
+  createEventIntoDb,
+  getAllEventsIntoDb,
+  archiveEventIntoDb,
+  deleteEventIntoDb,
 };
