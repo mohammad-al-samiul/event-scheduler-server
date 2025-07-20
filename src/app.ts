@@ -6,7 +6,14 @@ import notFound from "./app/middleware/notFound";
 const app: Application = express();
 
 app.use(express.json());
-app.use(cors({ origin: ["http://localhost:5173"] }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://event-scheduler-client.vercel.app",
+    ],
+  })
+);
 
 app.use("/api", router);
 
