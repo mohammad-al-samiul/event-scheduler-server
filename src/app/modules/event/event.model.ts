@@ -40,11 +40,13 @@ const eventSchema = new Schema<IEvent>(
 eventSchema.pre("save", function (next) {
   const dateTime = new Date(`${this.date}T${this.time}`);
   if (isNaN(dateTime.getTime())) {
-    throw new AppError(httpStatus.BAD_REQUEST, "Invalid date or time format");
+    return next(
+      new AppError(httpStatus.BAD_REQUEST, "Invalid date or time format")
+    );
   }
 
   if (!this.title || this.title.trim() === "") {
-    throw new AppError(httpStatus.BAD_REQUEST, "Title is required");
+    return next(new AppError(httpStatus.BAD_REQUEST, "Title is required"));
   }
 
   next();

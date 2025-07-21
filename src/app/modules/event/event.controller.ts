@@ -15,7 +15,7 @@ export const createEvent = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-export const getEvents = catchAsync(async (_req: Request, res: Response) => {
+export const getEvents = catchAsync(async (req: Request, res: Response) => {
   const result = await EventServices.getAllEventsIntoDb();
 
   sendResponse(res, {

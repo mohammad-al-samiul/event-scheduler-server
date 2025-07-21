@@ -2,7 +2,7 @@ import AppError from "../../error/AppError";
 import httpStatus from "http-status";
 import { IEvent } from "./event.interface";
 import { categorizeEvent } from "./event.utils";
-import { Event } from "./event.module";
+import { Event } from "./event.model";
 
 export const createEventIntoDb = async (
   payload: Partial<IEvent>
