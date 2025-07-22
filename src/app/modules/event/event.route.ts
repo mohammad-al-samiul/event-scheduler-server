@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.post("/", validateRequest(eventCreateZodSchema), createEvent);
 router.get("/", getEvents);
-router.put("/:id", archiveEvent);
+router.patch("/:id", archiveEvent);
 router.delete("/:id", deleteEvent);
 
 export const EventRoutes = router;
